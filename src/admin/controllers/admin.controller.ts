@@ -1,21 +1,20 @@
 import {NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import Admin from '../models/admin.model';
-import { errorHandler } from '../../responseHandlers/errorHandler';
+import { findAdmin } from '../utilities/findUtility';
 
 export const adminRegister = async (req: Request, res: Response, next: NextFunction) => {
     try{
-        let user = await Admin.findOne({
-            email: req.body.email
-        });
+        
+        let existingAdmin = await findAdmin('', req.body.email);
 
-        if(user){
+        if(existingAdmin){
             handleResponse(res, 400, "Admin Already exists")
             return;
         }
 
-        user = new Admin(req.body);
-        await user.save();
+        existingAdmin = new Admin(req.body);
+        await existingAdmin.save();
 
     }catch(err){
         next(err)
