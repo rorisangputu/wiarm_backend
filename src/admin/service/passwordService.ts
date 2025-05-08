@@ -20,7 +20,11 @@ export const passwordCompare = async(password: string, adminPass: string) => {
 
 export const GenerateSignature = async (adminId: string) => {
 
-    const token = await jwt.sign(adminId, process.env.JWT_SECRET_KEY as string, {expiresIn: "1d"} )
+    const token = await jwt.sign(
+        {adminId}, 
+        process.env.JWT_SECRET_KEY as string, 
+        {expiresIn: "1d"} 
+    )
     return token;
 }
 
