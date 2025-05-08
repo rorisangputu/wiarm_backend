@@ -3,6 +3,7 @@ import Admin from '../models/admin.model';
 import { findAdmin } from '../service/findService';
 import { AdminType } from '../../shared/types';
 import { GeneratePassword, generateSalt, GenerateSignature } from '../service/passwordService';
+import { handleResponse } from '../../responseHandlers/resHandler';
 
 export const adminRegister = async (req: Request, res: Response, next: NextFunction) => {
     try{
