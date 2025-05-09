@@ -25,7 +25,6 @@ const campaignSchema = new Schema<CampaignType>({
 }, {
     toJSON: {
         transform(doc, ret) {
-            delete ret.password;
             delete ret.__v;
             delete ret.createdAt;
             delete ret.updatedAt
