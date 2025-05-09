@@ -1,7 +1,7 @@
 // Import the shape of the user payload (usually from JWT) from a Data Transfer Object (DTO)
 import { NextFunction, Request, Response } from "express";
-import { AuthPayload } from "../../dto/auth.dto";
-import { ValidateSignature } from "../AdminUtility/Authenticate";
+import { AuthPayload } from "../dto/auth.dto";
+import { ValidateSignature } from '../utility/AdminUtility/Authenticate';
 
 // Declare a global augmentation for the Express namespace
 declare global {
