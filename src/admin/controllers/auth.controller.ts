@@ -31,3 +31,18 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
     next(error);
   }
 };
+
+export const logout = (req: Request, res: Response, next: NextFunction) => {
+    
+    try {
+        res.cookie("wiarm_admin_auth_token", "", {
+            expires: new Date(0),
+        });
+
+        return handleResponse(res, 200, "User logged out", null);
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
