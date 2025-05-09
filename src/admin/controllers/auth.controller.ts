@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { AdminLoginInputs } from "../../dto/admin.dto";
-import { findAdmin } from "../service/findService";
+import { findAdmin } from "../../utility/findUtility";
 import { handleResponse } from "../../responseHandlers/resHandler";
-import { passwordCompare } from "../service/passwordService";
+import { passwordCompare } from '../../utility/passwordUtility';
 
 export const adminLogin = async(req: Request, res: Response, next: NextFunction) => {
     const {email, password} = <AdminLoginInputs>req.body;

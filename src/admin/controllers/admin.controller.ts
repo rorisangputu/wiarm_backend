@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response } from 'express';
 import Admin from '../models/admin.model';
-import { findAdmin } from '../service/findService';
+import { findAdmin } from '../../utility/findUtility';
 import { AdminType } from '../../shared/types';
-import { GeneratePassword, generateSalt, GenerateSignature } from '../service/passwordService';
+import { GeneratePassword, generateSalt, GenerateSignature } from '../../utility/passwordUtility';
 import { handleResponse } from '../../responseHandlers/resHandler';
 
 export const adminRegister = async (req: Request, res: Response, next: NextFunction) => {
