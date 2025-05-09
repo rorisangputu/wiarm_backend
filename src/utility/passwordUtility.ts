@@ -16,7 +16,7 @@ export const GenerateSignature = async (adminId: string): Promise<string> => {
 };
 
 export const ValidateSignature = async (req: Request): Promise<AuthPayload | null> => {
-  const token = req.cookies["wiarm_admin_auth_token"];
+  const token = req.cookies["wiarm_auth_token"];
   if (!token) return null;
 
   try {
