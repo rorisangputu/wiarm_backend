@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AdminLoginInputs } from '../../dto/admin.dto';
-import { findAdmin } from '../../utility/findUtility';
+import { findAdmin } from '../../utility/AdminUtility/findUtility';
 import { handleResponse } from '../../responseHandlers/resHandler';
 import { GenerateSignature, passwordCompare } from '../../utility/passwordUtility';
 

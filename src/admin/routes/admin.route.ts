@@ -17,7 +17,10 @@ router.post('/register',
           res.status(400).json({ errors: errors.array() });
         }
         next(); // If validation passed, proceed to the controller
-    }, adminRegister);
+  }, adminRegister
+);
+
+
 
 
 export default router;
