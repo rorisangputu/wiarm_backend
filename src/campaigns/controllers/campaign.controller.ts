@@ -14,7 +14,25 @@ export const createCampaign = async (req: Request, res: Response, next: NextFunc
     await campaign.save();
 
     handleResponse(res, 201, 'Campaign Created', campaign);
+    return;
+      
   } catch (error) {
     next(error);
   }
 };
+
+export const getCampaign = async (req: Request, res: Response, next: NextFunction) => {
+    
+    try {
+        const campaigns = await Campaign.find()
+
+        if (campaigns.length === 0) {
+            return handleResponse(res, 404, "No Campaigns Found", []);
+        }
+
+        return handleResponse(res, 200, "Campaigns Found", campaigns);
+        
+    } catch (error) {
+        next(error)
+    }
+}
