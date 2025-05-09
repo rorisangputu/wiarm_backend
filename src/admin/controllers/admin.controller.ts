@@ -7,7 +7,7 @@ import { handleResponse } from '../../responseHandlers/resHandler';
 
 export const adminRegister = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { email, password, name } = <AdminType>req.body;
+    const { email, password, name }: AdminType = req.body;
 
     const existingAdmin = await findAdmin('', email);
     if (existingAdmin) {
