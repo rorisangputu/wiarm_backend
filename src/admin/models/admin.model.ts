@@ -15,16 +15,11 @@ const adminSchema = new Schema({
     name: {
         type: String,
         required:true
-    },
-    salt: {
-        type: String,
-        required: true
     }
 }, {
     toJSON: {
         transform(doc, ret){
             delete ret.password;
-            delete ret.salt;
             delete ret.__v;
             delete ret.createdAt;
             delete ret.updatedAt
@@ -33,12 +28,12 @@ const adminSchema = new Schema({
     timestamps: true
 })
 
-adminSchema.pre("save", async function(next) {
-    if (this.isModified('password')) {
-        this.password = await bcrypt.hash(this.password, 8)
-    }
-    next();
-})
+// adminSchema.pre("save", async function(next) {
+//     if (this.isModified('password')) {
+//         this.password = await bcrypt.hash(this.password, 8)
+//     }
+//     next();
+// })
 
 const Admin = mongoose.model<AdminType>("Admin", adminSchema);
 export default Admin;
