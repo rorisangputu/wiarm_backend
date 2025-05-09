@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import multer from 'multer'
 import { Authenticate } from '../../middlware/AdminAuth';
-import { createCampaign } from '../controllers/campaign.controller';
+import { createCampaign, getCampaign } from '../controllers/campaign.controller';
 import { body, validationResult } from 'express-validator';
 import { validateRequest } from '../../middlware/ValidateRequest';
 
@@ -16,6 +16,8 @@ const upload = multer({
     }
 })
 
+router.get('/', getCampaign);
+
 router.post('/create', Authenticate,
     [
         body('title').notEmpty().withMessage('Title is required').isString().withMessage('Name must be a string'),
@@ -24,6 +26,7 @@ router.post('/create', Authenticate,
         body('location').notEmpty().withMessage("Location is required"),
     ], // Middleware to check validation results
     validateRequest,
-    createCampaign);
+    createCampaign
+);
 
 export default router;
