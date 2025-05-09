@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import adminRoutes from '../admin/routes/admin.route'
+import authRoutes from '../admin/routes/auth.route'
 import { errorHandler } from '../responseHandlers/errorHandler';
 export default async (app: Application)=> {
 
@@ -11,6 +12,7 @@ export default async (app: Application)=> {
     app.use(cors());
     app.use(errorHandler);
 
+    app.use('/api/admin_auth', authRoutes)
     app.use('/api/admin', adminRoutes )
 
     return app;
