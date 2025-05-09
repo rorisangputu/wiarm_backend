@@ -6,7 +6,7 @@ import { GenerateSignature, passwordCompare } from '../../utility/passwordUtilit
 
 export const adminLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { email, password } = <AdminLoginInputs>req.body;
+    const { email, password }: AdminLoginInputs = req.body;
 
     const admin = await findAdmin('', email);
     if (!admin) {
