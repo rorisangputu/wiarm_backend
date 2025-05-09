@@ -2,7 +2,7 @@ import mongoose, {Schema} from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { AdminType } from '../../shared/types';
 
-const adminSchema = new Schema({
+const adminSchema = new Schema<AdminType>({
     email: {
         type: String,
         required: true,
