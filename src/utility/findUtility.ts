@@ -1,6 +1,6 @@
 import Admin from "../admin/models/admin.model"
 
-export const findAdmin = async (id: String | undefined, email?: String)=> {
+export const findAdmin = async (id: string | undefined, email?: string)=> {
     if(email){
         const admin = await Admin.findOne({email: email})
         return admin;
