@@ -5,3 +5,12 @@ export type AdminType = {
     name: string;
     
 }
+
+export type CampaignType = {
+    _id: string;
+    title: string;
+    description: string;
+    date: Date;
+    location: string,
+    image: string;
+}
