@@ -31,8 +31,8 @@ router.post('/create', Authenticate,
 
 router.get('/campaign/:id', getCampaignById);
 
-router.put('/edit/:id', editCampaign);
+router.put('/edit/:id', Authenticate, editCampaign);
 
-router.delete('/delete/:id', deleteCampaign)
+router.delete('/delete/:id', Authenticate, deleteCampaign)
 
 export default router;
