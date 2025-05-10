@@ -66,7 +66,24 @@ export const editCampaign = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+  try {
+    const updatedCampaign: CampaignType = req.body;
+
+    const campaign = await Campaign.findByIdAndUpdate(
+      { _id: req.params.id },
+      updatedCampaign,
+      { new: true }
+    );
+
+    if (!campaign) return handleResponse(res, 400, "Campaign not found", null);
+
+    await campaign.save();
+    handleResponse(res, 201, "Campaign Updated", campaign);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const deleteCampaign = async (
   req: Request,
