@@ -21,7 +21,7 @@ export const createCampaign = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-export const getCampaign = async (req: Request, res: Response, next: NextFunction) => {
+export const getCampaigns = async (req: Request, res: Response, next: NextFunction) => {
     
     try {
         const campaigns = await Campaign.find()
@@ -32,6 +32,23 @@ export const getCampaign = async (req: Request, res: Response, next: NextFunctio
 
         return handleResponse(res, 200, "Campaigns Found", campaigns);
         
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getCampaignById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        
+        const id: string = req.params.id;
+        const campaign = await Campaign.findById(id);
+
+        if (!campaign) {
+            return handleResponse(res, 400, 'Campaign does not exist', null);
+        }
+
+        return handleResponse(res, 200, "Campaign Found", campaign);
+
     } catch (error) {
         next(error)
     }
