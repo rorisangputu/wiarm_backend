@@ -89,4 +89,18 @@ export const deleteCampaign = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+  try {
+    //Getting campaign id from request parameter and converting it to string
+    const id: string = req.params.id.toString();
+
+      //
+    const campaign = await Campaign.findByIdAndDelete(id);
+
+    if (!campaign) return handleResponse(res, 400, "Campaign not found", null);
+
+    handleResponse(res, 200, "Campaign deleted", null);
+  } catch (error) {
+    next(error);
+  }
+};
