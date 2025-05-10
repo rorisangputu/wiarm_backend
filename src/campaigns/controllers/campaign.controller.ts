@@ -55,7 +55,7 @@ export const getCampaignById = async (req: Request, res: Response, next: NextFun
 }
 
 export const editCampaign = async (req: Request, res: Response, next: NextFunction) => {
-
+    
 }
 
 export const deleteCampaign = async (req: Request, res: Response, next: NextFunction) => {
