@@ -1,6 +1,6 @@
 // Import the shape of the user payload (usually from JWT) from a Data Transfer Object (DTO)
 import { NextFunction, Request, Response } from "express";
-import { AuthPayload } from "../dto/auth.dto";
+import { AdminAuthPayload } from "../dto/auth.dto";
 import { ValidateSignature } from '../utility/AdminUtility/Authenticate';
 
 // Declare a global augmentation for the Express namespace
@@ -11,7 +11,7 @@ declare global {
         interface Request {
             // Add an optional 'user' property to the Request object
             // This allows us to attach the authenticated user's info (like ID, email, role, etc.)
-            admin?: AuthPayload;
+            admin?: AdminAuthPayload;
         }
     }
 }
