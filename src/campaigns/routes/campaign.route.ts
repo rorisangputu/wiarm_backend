@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import multer from 'multer'
 import { Authenticate } from '../../middlware/AdminAuth';
-import { createCampaign, getCampaign } from '../controllers/campaign.controller';
+import { createCampaign, getCampaignById, getCampaigns } from '../controllers/campaign.controller';
 import { body, validationResult } from 'express-validator';
 import { validateRequest } from '../../middlware/ValidateRequest';
 
@@ -16,7 +16,7 @@ const upload = multer({
     }
 })
 
-router.get('/', getCampaign);
+router.get('/', getCampaigns);
 
 router.post('/create', Authenticate,
     [
@@ -28,5 +28,7 @@ router.post('/create', Authenticate,
     validateRequest,
     createCampaign
 );
+
+router.get('/campaign/:id', getCampaignById);
 
 export default router;
