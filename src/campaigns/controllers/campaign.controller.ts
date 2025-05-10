@@ -39,7 +39,7 @@ export const getCampaigns = async (req: Request, res: Response, next: NextFuncti
 
 export const getCampaignById = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
+
         const id: string = req.params.id;
         const campaign = await Campaign.findById(id);
 
@@ -52,4 +52,12 @@ export const getCampaignById = async (req: Request, res: Response, next: NextFun
     } catch (error) {
         next(error)
     }
+}
+
+export const editCampaign = async (req: Request, res: Response, next: NextFunction) => {
+
+}
+
+export const deleteCampaign = async (req: Request, res: Response, next: NextFunction) => {
+    
 }
