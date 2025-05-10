@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import multer from 'multer'
 import { Authenticate } from '../../middlware/AdminAuth';
-import { createCampaign, getCampaignById, getCampaigns } from '../controllers/campaign.controller';
+import { createCampaign, deleteCampaign, editCampaign, getCampaignById, getCampaigns } from '../controllers/campaign.controller';
 import { body, validationResult } from 'express-validator';
 import { validateRequest } from '../../middlware/ValidateRequest';
 
@@ -30,5 +30,9 @@ router.post('/create', Authenticate,
 );
 
 router.get('/campaign/:id', getCampaignById);
+
+router.put('/edit/:id', editCampaign);
+
+router.delete('/delete/:id', deleteCampaign)
 
 export default router;
