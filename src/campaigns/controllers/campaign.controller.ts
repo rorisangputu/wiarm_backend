@@ -18,8 +18,7 @@ export const createCampaign = async (
     const campaign = new Campaign(newCampaign);
     await campaign.save();
 
-    handleResponse(res, 201, "Campaign Created", campaign);
-    return;
+    return handleResponse(res, 201, "Campaign Created", campaign);
   } catch (error) {
     next(error);
   }
@@ -49,11 +48,11 @@ export const getCampaignById = async (
   next: NextFunction
 ) => {
   try {
-    const id: string = req.params.id.toString();
+    const id: string = req.params.id;
     const campaign = await Campaign.findById(id);
 
     if (!campaign) {
-      return handleResponse(res, 400, "Campaign does not exist", null);
+      return handleResponse(res, 404, "Campaign does not exist", null);
     }
 
     return handleResponse(res, 200, "Campaign Found", campaign);
@@ -68,17 +67,17 @@ export const editCampaign = async (
   next: NextFunction
 ) => {
   try {
+    const id = req.params.id;
     const updatedCampaign: CampaignType = req.body;
 
     const campaign = await Campaign.findByIdAndUpdate(
-      { _id: req.params.id },
+      { _id: id },
       updatedCampaign,
       { new: true }
     );
 
-    if (!campaign) return handleResponse(res, 400, "Campaign not found", null);
+    if (!campaign) return handleResponse(res, 404, "Campaign not found", null);
 
-    await campaign.save();
     handleResponse(res, 201, "Campaign Updated", campaign);
   } catch (error) {
     next(error);
@@ -92,9 +91,9 @@ export const deleteCampaign = async (
 ) => {
   try {
     //Getting campaign id from request parameter and converting it to string
-    const id: string = req.params.id.toString();
+    const id: string = req.params.id;
 
-      //
+    //
     const campaign = await Campaign.findByIdAndDelete(id);
 
     if (!campaign) return handleResponse(res, 400, "Campaign not found", null);
