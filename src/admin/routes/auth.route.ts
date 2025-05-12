@@ -28,9 +28,8 @@ router.post(
   adminLogin
 );
 
-router.get("/validate-user", Authenticate, (req: Request, res: Response) => {
-  res.status(200).json({ admin: req.admin });
-  handleResponse(res, 200, "User is authenticated", { admin: req.admin });
+router.get("/validate-token", Authenticate, (req: Request, res: Response) => {
+  return handleResponse(res, 200, "User is authenticated", { admin: req.admin });
 });
 router.post("/logout", logout);
 
