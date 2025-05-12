@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 import multer from "multer";
 import { Authenticate } from "../../middlware/AdminAuth";
 import {
@@ -33,10 +33,18 @@ router.post(
   createCampaign
 );
 
-router.get("/campaign/:id", getCampaignById);
+router.get("/:id", ValidateObjectId, getCampaignById);
 
-router.put("/edit/:id", Authenticate, ValidateObjectId, editCampaign);
+router.put(
+  "/:id/edit",
+  Authenticate,
+  ValidateObjectId,
+  campaignValidationRules,
+  // Middleware to check validation results
+  validateRequest,
+  editCampaign
+);
 
-router.delete("/delete/:id", Authenticate, deleteCampaign);
+router.delete("/:id/delete", Authenticate, ValidateObjectId, deleteCampaign);
 
 export default router;
