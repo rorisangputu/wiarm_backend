@@ -27,6 +27,7 @@ router.get("/", getCampaigns);
 router.post(
   "/create",
   Authenticate,
+  upload.none(),
   campaignValidationRules,
   // Middleware to check validation results
   validateRequest,
