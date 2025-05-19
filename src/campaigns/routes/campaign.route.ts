@@ -47,6 +47,6 @@ router.put(
   editCampaign
 );
 
-router.delete("/:id/delete", Authenticate, ValidateObjectId, deleteCampaign);
+router.delete("/:id", Authenticate, ValidateObjectId, deleteCampaign);
 
 export default router;
