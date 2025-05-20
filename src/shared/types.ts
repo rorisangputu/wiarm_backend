@@ -11,5 +11,5 @@ export type CampaignType = {
   description: string;
   date: string;
   location: string;
-  image: string;
+  images: string[];
 };
