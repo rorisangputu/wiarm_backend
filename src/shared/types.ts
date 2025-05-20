@@ -9,7 +9,7 @@ export type CampaignType = {
   _id: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   location: string;
   images: string[];
 };
