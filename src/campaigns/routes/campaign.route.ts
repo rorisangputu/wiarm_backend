@@ -39,7 +39,7 @@ router.get("/:id", ValidateObjectId, getCampaignById);
 router.put(
   "/:id/edit",
   Authenticate,
-  upload.none(),
+  upload.array("imageFiles", 6),
   ValidateObjectId,
   campaignValidationRules,
   // Middleware to check validation results
