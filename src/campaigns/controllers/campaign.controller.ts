@@ -9,8 +9,7 @@ export const createCampaign = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body);
-  return;
+  //console.log(req.body, req.files);
   try {
     const imageFiles = req.files as Express.Multer.File[];
     const newCampaign: CampaignType = req.body;
