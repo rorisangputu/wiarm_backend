@@ -1,38 +1,41 @@
-import mongoose, { Schema } from 'mongoose';
-import { CampaignType } from '../../shared/types';
+import mongoose, { Schema } from "mongoose";
+import { CampaignType } from "../../shared/types";
 
-const campaignSchema = new Schema<CampaignType>({
-
+const campaignSchema = new Schema<CampaignType>(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     description: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     date: {
-        type: Date,
-        required: true
+      type: Date,
+      required: true,
     },
     location: {
-        type: String,
+      type: String,
     },
-    image: {
+    images: [
+      {
         type: String,
-        required: true
-    },
-}, {
+        required: true,
+      },
+    ],
+  },
+  {
     toJSON: {
-        transform(doc, ret) {
-            delete ret.__v;
-            delete ret.createdAt;
-            delete ret.updatedAt
-        }
+      transform(doc, ret) {
+        delete ret.__v;
+        delete ret.createdAt;
+        delete ret.updatedAt;
+      },
     },
-    timestamps: true
-});
+    timestamps: true,
+  }
+);
 
 const Campaign = mongoose.model<CampaignType>("Campaign", campaignSchema);
 export default Campaign;
-
