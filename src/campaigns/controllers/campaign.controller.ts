@@ -2,19 +2,22 @@ import { NextFunction, Request, Response } from "express";
 import { handleResponse } from "../../responseHandlers/resHandler";
 import { CampaignType } from "../../shared/types";
 import Campaign from "../model/campaign.model";
+import cloudinary from "cloudinary";
 
 export const createCampaign = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body);
+  return;
   try {
-    const newCampaign: CampaignType = {
-      ...req.body,
-      image:
-        "https://farmsquare.ng/wp-content/uploads/2021/08/IMG_20210312_111515.jpg",
-    };
+    const imageFiles = req.files as Express.Multer.File[];
+    const newCampaign: CampaignType = req.body;
 
+    //1. Uploading images to cloudinary
+    const imageUrls = await uploadImages(imageFiles);
+    newCampaign.images = imageUrls;
     const campaign = new Campaign(newCampaign);
     await campaign.save();
 
@@ -103,3 +106,19 @@ export const deleteCampaign = async (
     next(error);
   }
 };
+
+async function uploadImages(imageFiles: Express.Multer.File[]) {
+  const uploadPromises = imageFiles.map(async (image) => {
+    //Converting image to base64 string
+    const b64 = Buffer.from(image.buffer).toString("base64");
+    //creating a string that describes and image
+    let dataURI = "data:" + image.mimetype + ";base64," + b64;
+    //using cloudinary sdk to upload image to cloudinary
+    const res = await cloudinary.v2.uploader.upload(dataURI);
+    return res.url;
+  });
+
+  //2. If Upload success, add urls to new hotels
+  const images = await Promise.all(uploadPromises);
+  return images;
+}
