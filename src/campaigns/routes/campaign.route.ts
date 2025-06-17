@@ -37,7 +37,7 @@ router.post(
 router.get("/:id", ValidateObjectId, getCampaignById);
 
 router.put(
-  "/:id/edit",
+  "/:id",
   Authenticate,
   upload.array("imageFiles", 6),
   ValidateObjectId,
