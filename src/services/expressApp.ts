@@ -5,6 +5,8 @@ import adminRoutes from "../admin/routes/admin.route";
 import authRoutes from "../admin/routes/auth.route";
 import campaignRoutes from "../campaigns/routes/campaign.route";
 import { errorHandler } from "../responseHandlers/errorHandler";
+import path from "path";
+
 export default async (app: Application) => {
   app.use(cookieParser());
   app.use(express.json());
@@ -15,6 +17,9 @@ export default async (app: Application) => {
       credentials: true,
     })
   );
+
+  app.use(express.static(path.join(__dirname, "../../../wiarm_frontend/dist")));
+
   app.use(errorHandler);
 
   app.use("/api/admin_auth", authRoutes);
